@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      jakarta.persistence.sharedCache.mode: UNSPECIFIED
+    hibernate.ddl-auto: none
+    hibernate.show-sql: true
+    open-in-view: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: password
+  main:
+    banner_mode: OFF
+  output:
+    ansi:
+      enabled: ALWAYS
+
+logging:
+  level:
+    root: WARN
+    com.example.demo: DEBUG
