@@ -1,4 +1,4 @@
-package com.example.demo
+package com.example.demo.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -8,6 +8,6 @@ class SecurityConfig {
 
     @Bean
     fun configure(http: HttpSecurity): SecurityFilterChain {
-        return http.cors().disable().authorizeHttpRequests { req -> req.anyRequest().permitAll() }.build()
+        return http.csrf().disable().authorizeHttpRequests { req -> req.anyRequest().permitAll() }.build()
     }
 }
