@@ -1,7 +1,6 @@
-package com.example.demo
+package com.example.demo.api.item
 
-import com.example.demo.api.item.Item
-import com.example.demo.api.item.ItemRepository
+import com.example.demo.DemoApplication
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,10 +11,11 @@ import java.util.*
 @DataJpaTest
 @ContextConfiguration(classes = [DemoApplication::class])
 class RepositoriesTests @Autowired constructor(
-    val itemRepository: ItemRepository) {
+    val itemRepository: ItemRepository
+) {
 
     @Test
-    fun `Create then get item`() {
+    fun createThenGetItem() {
         val item = Item("name", null)
         val saved = itemRepository.save(item)
         assertEquals(item, saved)

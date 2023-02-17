@@ -20,3 +20,4 @@ logging:
   level:
     root: WARN
     com.example.demo: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor: TRACE
