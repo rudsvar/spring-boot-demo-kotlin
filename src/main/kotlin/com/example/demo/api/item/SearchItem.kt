@@ -1,6 +1,6 @@
 package com.example.demo.api.item
 
-class SearchItem(
+data class SearchItem(
     private val id: Long?,
     val name: String?,
     private val description: String?,
