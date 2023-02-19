@@ -15,11 +15,13 @@ class HelloControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun saysHelloWorld() {
-        mockMvc.perform(get("/hello")).andExpect(status().isOk).andExpect(content().string("Hello, World!"))
+        mockMvc.perform(get("/hello")).andExpect(status().isOk)
+            .andExpect(content().json("""{ "greeting": "Hello, World!" }"""))
     }
 
     @Test
     fun saysHelloFoo() {
-        mockMvc.perform(get("/hello?name=Foo")).andExpect(status().isOk).andExpect(content().string("Hello, Foo!"))
+        mockMvc.perform(get("/hello?name=Foo")).andExpect(status().isOk)
+            .andExpect(content().json("""{ "greeting": "Hello, Foo!" }"""))
     }
 }

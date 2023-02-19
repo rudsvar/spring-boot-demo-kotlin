@@ -29,7 +29,7 @@ class ItemController(@Autowired val itemRepository: ItemRepository) {
         return itemRepository.save(newItem.toEntity()).toReadItem()
     }
 
-    @PostMapping("/items")
+    @PostMapping("/items/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     fun readItem(id: Long): ReadItem {
         log.info("Reading item {}", id)
