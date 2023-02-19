@@ -1,8 +1,7 @@
 package com.example.demo.api.item
 
-data class NewItem(
+data class ReadItem(
+    val id: Long,
     val name: String,
     val description: String?,
 )
-
-fun NewItem.toEntity() = ItemEntity(null, name, description)
