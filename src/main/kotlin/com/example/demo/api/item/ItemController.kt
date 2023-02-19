@@ -13,9 +13,9 @@ class ItemController(@Autowired private val itemService: ItemService) {
 
     @PostMapping("/items")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createItem(@RequestBody newItem: NewItem): ReadItem {
-        log.info("Creating item {}", newItem)
-        return itemService.createItem(newItem)
+    fun createItem(@RequestBody createItem: CreateItem): ReadItem {
+        log.info("Creating item {}", createItem)
+        return itemService.createItem(createItem)
     }
 
     @GetMapping("/items/{id}")

@@ -15,15 +15,15 @@ class ItemService(@Autowired private val itemRepository: ItemRepository) {
 
     private val log: Logger = LoggerFactory.getLogger(this.javaClass)
 
-    fun createItem(newItem: NewItem): ReadItem {
-        log.info("Creating item {}", newItem)
+    fun createItem(createItem: CreateItem): ReadItem {
+        log.info("Creating item {}", createItem)
 
         // Check if name is already used
-        if (itemRepository.existsByName(newItem.name)) {
+        if (itemRepository.existsByName(createItem.name)) {
             throw ConflictException("Item with that name already exists")
         }
 
-        return itemRepository.save(newItem.toEntity()).toReadItem()
+        return itemRepository.save(createItem.toEntity()).toReadItem()
     }
 
     fun readItem(id: Long): ReadItem {

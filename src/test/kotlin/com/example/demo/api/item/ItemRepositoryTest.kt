@@ -17,11 +17,11 @@ class ItemRepositoryTests @Autowired constructor(
 
     @Test
     fun createThenGetItem() {
-        val newItem = NewItem("name", null)
-        val saved = itemRepository.save(newItem.toEntity())
+        val createItem = CreateItem("name", null)
+        val saved = itemRepository.save(createItem.toEntity())
         assertNotNull(saved.id)
-        assertEquals(newItem.name, saved.name)
-        assertEquals(newItem.description, saved.description)
+        assertEquals(createItem.name, saved.name)
+        assertEquals(createItem.description, saved.description)
 
         val found = itemRepository.findById(saved.id!!)
         assertEquals(Optional.of(saved), found)

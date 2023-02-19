@@ -22,10 +22,10 @@ class ItemControllerTest(@Autowired val mockMvc: MockMvc, @Autowired val mapper:
     @Test
     fun createItemWorks() {
         val name = UUID.randomUUID().toString()
-        val newItem = mapper.writeValueAsString(NewItem(name, null))
-        mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(newItem))
+        val createItem = mapper.writeValueAsString(CreateItem(name, null))
+        mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(createItem))
             .andExpect(status().isCreated)
-        mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(newItem))
+        mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(createItem))
             .andExpect(status().isConflict)
     }
 
@@ -37,8 +37,8 @@ class ItemControllerTest(@Autowired val mockMvc: MockMvc, @Autowired val mapper:
     @Test
     fun getExistingItemGivesOk() {
         val name = UUID.randomUUID().toString()
-        val newItem = mapper.writeValueAsString(NewItem(name, null))
-        val result = mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(newItem))
+        val createItem = mapper.writeValueAsString(CreateItem(name, null))
+        val result = mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(createItem))
             .andReturn().response.contentAsString
         val readItem: ReadItem = mapper.readValue(result, ReadItem::class.java)
         mockMvc.perform(get("/items/" + readItem.id)).andExpect(status().isOk)
@@ -47,7 +47,7 @@ class ItemControllerTest(@Autowired val mockMvc: MockMvc, @Autowired val mapper:
     @Test
     fun updateNonExistingItemGivesNotFound() {
         val name = UUID.randomUUID().toString()
-        val item = mapper.writeValueAsString(NewItem(name, null))
+        val item = mapper.writeValueAsString(CreateItem(name, null))
         mockMvc.perform(put("/items/0").contentType(MediaType.APPLICATION_JSON).content(item))
             .andExpect(status().isNotFound)
     }
@@ -55,8 +55,8 @@ class ItemControllerTest(@Autowired val mockMvc: MockMvc, @Autowired val mapper:
     @Test
     fun updateExistingItemGivesOk() {
         val name = UUID.randomUUID().toString()
-        val newItem = mapper.writeValueAsString(NewItem(name, null))
-        val result = mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(newItem))
+        val createItem = mapper.writeValueAsString(CreateItem(name, null))
+        val result = mockMvc.perform(post("/items").contentType(MediaType.APPLICATION_JSON).content(createItem))
             .andReturn().response.contentAsString
         val readItem: ReadItem = mapper.readValue(result, ReadItem::class.java)
         mockMvc.perform(get("/items/" + readItem.id)).andExpect(status().isOk)
