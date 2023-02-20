@@ -25,16 +25,17 @@ class ItemController(@Autowired private val itemService: ItemService) {
     }
 
     @PutMapping("/items/{id}")
-    fun updateItem(@PathVariable id: Long, @RequestBody updateItem: UpdateItem): ReadItem {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun updateItem(@PathVariable id: Long, @RequestBody updateItem: UpdateItem) {
         log.info("Updating item {} to {}", id, updateItem)
-        return itemService.updateItem(id, updateItem)
+        itemService.updateItem(id, updateItem)
     }
 
     @DeleteMapping("/items/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteItem(@PathVariable("id") id: Long) {
         log.info("Deleting item")
-        return itemService.deleteItem(id)
+        itemService.deleteItem(id)
     }
 
     @GetMapping("/items")
