@@ -62,7 +62,7 @@ class ItemControllerTest(@Autowired val mockMvc: MockMvc, @Autowired val mapper:
         val name = UUID.randomUUID().toString()
         val update = mapper.writeValueAsString(CreateItem(name, null))
         mockMvc.perform(put("/items/" + item.id).contentType(MediaType.APPLICATION_JSON).content(update))
-            .andExpect(status().isOk)
+            .andExpect(status().isNoContent)
     }
 
     @Test
